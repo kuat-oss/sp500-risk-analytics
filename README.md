@@ -32,6 +32,16 @@ The data goes back to January 1871 (Robert Shiller's S&P 500 series), joined wit
 
 **Index turnover.** 32% of today's S&P 500 companies were added in the last 10 years.
 
+## So what? Decisions this supports
+
+I wrote these for a team that builds a retirement or investing product (a robo-advisor, a 401(k) planner, a bank's savings app). They are about how to design and explain a product, not advice for any one person.
+
+1. **Don't plan with the long-run average when the market is expensive.** The 7% real long-run return drops to about 2-3% in the model when CAPE is near 30. A planning tool that shows users one 7% line will over-promise. Better: show a range, and lower the default return assumption when valuations are high.
+2. **Stress-test plans for long recoveries, not just big drops.** A -50% fall happened twice since 2000, and the worst recovery took 15 years. Anyone who needs the money within about 5 years shouldn't be 100% in stocks. A product can use this to set default stock/bond mixes by time horizon.
+3. **Keep users invested during panics.** The months with the highest VIX were followed by the best 12-month returns in this sample. Panic selling locks in the loss. Practical ideas: a "markets are down, here's history" message instead of a big red number, or a short delay before a full sell-off order goes through.
+4. **Show outcomes as a range, not a single number.** The simulator's 5th and 95th percentiles for the same $500/month plan are $208k and over $2M. Showing the median alone hides both the risk and the upside. Show the bad case next to the typical case.
+5. **Report risk next to return.** A strategy with a great CAGR but a -50% drawdown is a different product. Max drawdown and time to recover should sit next to returns on any performance screen.
+
 ## How it's built
 
 ```
