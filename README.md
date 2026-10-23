@@ -2,6 +2,8 @@
 
 ![ci](https://github.com/kuat-oss/sp500-risk-analytics/actions/workflows/ci.yml/badge.svg)
 
+**Live app: [sp500-risk-analytics.streamlit.app](https://sp500-risk-analytics-zh2pj9a8osmogbshgql54s.streamlit.app/)**
+
 I wanted to answer a few questions about the US stock market with real long-run data instead of opinions: how bad can it get, how long does it take to recover, does an expensive market really mean lower returns later, and what does investing every month actually look like over 30 years.
 
 The data goes back to January 1871 (Robert Shiller's S&P 500 series), joined with BLS inflation, 10-year Treasury yields and the VIX. I modeled it in **dbt** on **DuckDB**, wrote the risk math as a small tested **Python** package, and put it all in a **Streamlit** app. **GitHub Actions** runs the dbt tests, unit tests, lint and a **Docker** build on every push.
