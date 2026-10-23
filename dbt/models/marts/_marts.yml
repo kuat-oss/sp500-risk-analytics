@@ -1,0 +1,51 @@
+version: 2
+
+models:
+  - name: fct_market_monthly
+    description: >
+      One row per month since 1871. Total return assumes dividends are reinvested
+      monthly (1/12 of the trailing dividend). Real figures use CPI-U.
+    columns:
+      - name: month
+        tests: [unique, not_null]
+      - name: total_return
+        description: Monthly total return (price + dividend).
+        tests:
+          - within_range: {arguments: {min_value: -0.5, max_value: 0.6}}
+      - name: drawdown
+        description: Distance from the previous all-time high of the total return index.
+        tests:
+          - not_null
+          - within_range: {arguments: {min_value: -1, max_value: 0}}
+      - name: cape_calc
+        description: Cyclically adjusted P/E calculated here, should match Shiller's PE10.
+        tests:
+          - within_range: {arguments: {min_value: 3, max_value: 60}}
+      - name: is_dividend_estimated
+        description: True when the dividend was carried forward because it is not published yet.
+
+  - name: fct_drawdown_episodes
+    description: Every decline of 20% or more from a previous high, with recovery time.
+    columns:
+      - name: episode_id
+        tests: [unique, not_null]
+      - name: max_drawdown
+        tests:
+          - within_range: {arguments: {min_value: -1, max_value: -0.2}}
+
+  - name: fct_decade_returns
+    columns:
+      - name: decade
+        tests: [unique, not_null]
+
+  - name: fct_vix_regimes
+    columns:
+      - name: vix_regime
+        tests: [unique, not_null]
+
+  - name: dim_constituents
+    columns:
+      - name: symbol
+        tests: [unique, not_null]
+
+  - name: fct_index_additions
