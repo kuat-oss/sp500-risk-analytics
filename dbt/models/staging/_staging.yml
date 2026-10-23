@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: stg_sp500_monthly
+    description: Shiller S&P 500 monthly data with "0 = not published" turned into nulls.
+    columns:
+      - name: month
+        tests: [unique, not_null]
+      - name: sp500_price
+        tests:
+          - not_null
+          - within_range: {arguments: {min_value: 1, max_value: 100000}}
+
+  - name: stg_cpi_monthly
+    columns:
+      - name: month
+        tests: [unique, not_null]
+
+  - name: stg_treasury_10y_monthly
+    columns:
+      - name: month
+        tests: [unique, not_null]
+      - name: yield_10y
+        tests:
+          - within_range: {arguments: {min_value: 0, max_value: 20}}
+
+  - name: stg_vix_daily
+    columns:
+      - name: trade_date
+        tests: [unique, not_null]
+      - name: vix_close
+        tests:
+          - not_null
+          - within_range: {arguments: {min_value: 5, max_value: 100}}
+
+  - name: stg_sp500_constituents
+    columns:
+      - name: symbol
+        tests: [unique, not_null]
+      - name: sector
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Communication Services', 'Consumer Discretionary', 'Consumer Staples',
+                         'Energy', 'Financials', 'Health Care', 'Industrials',
+                         'Information Technology', 'Materials', 'Real Estate', 'Utilities']
+      - name: date_added
+        tests: [not_null]

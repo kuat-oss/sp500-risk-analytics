@@ -1,0 +1,18 @@
+version: 2
+
+sources:
+  - name: raw
+    description: Public csv files in data/raw, read directly by DuckDB.
+    meta:
+      external_location: "../data/raw/{name}.csv"
+    tables:
+      - name: sp500_monthly
+        description: Robert Shiller's monthly S&P 500 series (price = average of daily closes, dividend and earnings are trailing 12 month).
+      - name: cpi_monthly
+        description: BLS CPI-U, not seasonally adjusted, 1913 onward.
+      - name: treasury_10y_monthly
+        description: 10 year US Treasury constant maturity yield, monthly, 1953 onward.
+      - name: vix_daily
+        description: CBOE VIX daily open/high/low/close, 1990 onward.
+      - name: sp500_constituents
+        description: Current S&P 500 members with GICS sector and date added to the index.
